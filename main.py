@@ -51,7 +51,7 @@ def get_random_color():
 
 def get_notion_page():
   notion = Client(auth=notion_secret)
-  results = notion.search(query=today).get("results")
+  results = notion.search(query=today_str).get("results")
   if len(results) > 0:
       result = results[0]
       page_url = result["url"]
