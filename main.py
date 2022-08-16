@@ -92,7 +92,7 @@ def update():
     old_status = get_notion_status()
     while True:
         new_status = get_notion_status()
-        if (new_status != old_status & new_status == "Yes") :
+        if (new_status != old_status) & (new_status == "Yes") :
             old_status = new_status
             sendMsg()
         time.sleep(30)
