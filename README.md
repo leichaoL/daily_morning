@@ -5,7 +5,7 @@
 
 
 效果如图。
-![5e72e89fd7ff692a0bfa62010517c0c](img\微信图片_20220816213600.jpg)
+![5e72e89fd7ff692a0bfa62010517c0c](https://github.com/leichao-lc/daily_morning/blob/master/img/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20220816213600.jpg)
 
 首先，按图搜索，测试号，进来之后微信扫码登录！
 ![cf7dbd4502df44765ed3506f55caea5](https://user-images.githubusercontent.com/9566402/183242272-134e37e7-718d-42dd-9ed7-fca2810e94e6.png)
