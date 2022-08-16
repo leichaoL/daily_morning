@@ -30,11 +30,20 @@ notion_secret = os.environ["NOTION_SECRET"]
 def get_weather():
   url = "http://autodev.openspeech.cn/csp/api/v2.1/weather?openId=aiuicus&clientType=android&sign=android&city=" + city
   res = requests.get(url).json()
-  weather = res['data']['list'][0]
-  return weather['weather'], math.floor(weather['temp'])
+  if datetime.datetime.now().hour > 12:
+    wea = res['data']['list'][1]
+    weather = wea['weather']
+    low = wea['low']
+    high = wea['high']
+  else:
+      wea = res['data']['list'][0]
+      weather = wea['weather']
+      low = wea['low']
+      high = wea['high']
+  return weather['weather'], low, high
 
 def get_count():
-  delta = today - datetime.strptime(start_date, "%Y-%m-%d")
+  delta = today - datetime.strptime(start_date, "%Y-%m-%d") + 1
   return delta.days
 
 def get_birthday():
@@ -92,10 +101,10 @@ def sendMsg():
   client = WeChatClient(app_id, app_secret)
 
   wm = WeChatMessage(client)
-  wea, temperature = get_weather()
+  wea, low, high = get_weather()
   page_id = get_notion_id()
   text = get_notion_text(page_id)
-  data = {"weather":{"value":wea},"temperature":{"value":temperature},"love_days":{"value":get_count()},"birthday_left":{"value":get_birthday()},"words":{"value":get_words(), "color":get_random_color()}, "text":{"value":text}}
+  data = {"weather":{"value":wea},"low":{"value":low},"high":{"value":high},"love_days":{"value":get_count()},"birthday_left":{"value":get_birthday()},"words":{"value":get_words(), "color":get_random_color()}, "text":{"value":text}}
   res = wm.send_template(user_id, template_id, data)
   print(res)
 
