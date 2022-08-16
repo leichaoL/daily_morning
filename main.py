@@ -40,7 +40,7 @@ def get_weather():
       weather = wea['weather']
       low = wea['low']
       high = wea['high']
-  return weather['weather'], low, high
+  return weather, low, high
 
 def get_count():
   delta = today - datetime.strptime(start_date, "%Y-%m-%d") + 1
@@ -92,7 +92,7 @@ def update():
     old_status = get_notion_status()
     while True:
         new_status = get_notion_status()
-        if (new_status != old_status):
+        if (new_status != old_status & new_status == "Yes") :
             old_status = new_status
             sendMsg()
         time.sleep(30)
