@@ -32,14 +32,14 @@ def get_weather():
   if datetime.now().hour > 12:
     wea = res['data']['list'][1]
     weather = wea['weather']
-    low = math.floor(wea['low'])
-    high = math.floor(wea['high'])
+    low = wea['low']
+    high = wea['high']
   else:
       wea = res['data']['list'][0]
       weather = wea['weather']
       low = wea['low']
       high = wea['high']
-  return weather, low, high
+  return weather, math.floor(low), math.floor(high)
 
 def get_count():
   delta = today - datetime.strptime(start_date, "%Y-%m-%d") 
