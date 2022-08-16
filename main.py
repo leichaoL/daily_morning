@@ -7,7 +7,6 @@ import requests
 import os
 import random
 from notion_client import Client
-from notion_client import AsyncClient
 import time
 
 today = datetime.now()
@@ -33,8 +32,8 @@ def get_weather():
   if datetime.now().hour > 12:
     wea = res['data']['list'][1]
     weather = wea['weather']
-    low = wea['low']
-    high = wea['high']
+    low = math.floor(wea['low'])
+    high = math.floor(wea['high'])
   else:
       wea = res['data']['list'][0]
       weather = wea['weather']
@@ -95,7 +94,7 @@ def update():
         if (new_status != old_status) & (new_status == "Yes") :
             old_status = new_status
             sendMsg()
-        time.sleep(30)
+        time.sleep(10)
 
 def sendMsg():
   client = WeChatClient(app_id, app_secret)
@@ -104,7 +103,7 @@ def sendMsg():
   wea, low, high = get_weather()
   page_id = get_notion_id()
   text = get_notion_text(page_id)
-  data = {"weather":{"value":wea},"low":{"value":low},"high":{"value":high},"love_days":{"value":get_count()},"birthday_left":{"value":get_birthday()},"words":{"value":get_words(), "color":get_random_color()}, "text":{"value":text}}
+  data = {"city":{"value":city},"weather":{"value":wea},"low":{"value":low},"high":{"value":high},"love_days":{"value":get_count()},"birthday_left":{"value":get_birthday()}, "text":{"value":text}}
   res = wm.send_template(user_id, template_id, data)
   print(res)
 
