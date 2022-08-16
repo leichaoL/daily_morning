@@ -30,7 +30,7 @@ notion_secret = os.environ["NOTION_SECRET"]
 def get_weather():
   url = "http://autodev.openspeech.cn/csp/api/v2.1/weather?openId=aiuicus&clientType=android&sign=android&city=" + city
   res = requests.get(url).json()
-  if datetime.datetime.now().hour > 12:
+  if datetime.now().hour > 12:
     wea = res['data']['list'][1]
     weather = wea['weather']
     low = wea['low']
