@@ -71,9 +71,9 @@ def get_notion_status():
     pages = notion.search(query=today_str).get("results")
     if len(pages) > 0:
         page = pages[0]
-        page_status = page["properties"]["是否发布"]["select"]["name"]
+        page_status = page["properties"]["Published"]["checkbox"]
     else:
-        page_status = "No"
+        page_status = "False"
     return page_status
 
 def get_notion_text(page_id):
@@ -91,7 +91,7 @@ def update():
     old_status = get_notion_status()
     while (datetime.now().hour > 18) | (datetime.now().hour < 2):
         new_status = get_notion_status()
-        if (new_status != old_status) & (new_status == "Yes") :
+        if (new_status != old_status) & (new_status == "True") :
             old_status = new_status
             sendMsg()
         time.sleep(10)
