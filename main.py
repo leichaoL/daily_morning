@@ -89,12 +89,12 @@ def get_notion_text(page_id):
 
 def update():
     old_status = get_notion_status()
-    while (datetime.now().hour > 18) | (datetime.now().hour < 2):
+    while True:
         new_status = get_notion_status()
         if (new_status != old_status) & (new_status == "True") :
             old_status = new_status
             sendMsg()
-        time.sleep(10)
+        time.sleep(5)
 
 def sendMsg():
   client = WeChatClient(app_id, app_secret)
