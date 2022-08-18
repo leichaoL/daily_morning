@@ -29,7 +29,7 @@ notion_secret = os.environ["NOTION_SECRET"]
 def get_weather():
     url = "http://autodev.openspeech.cn/csp/api/v2.1/weather?openId=aiuicus&clientType=android&sign=android&city=" + city
     res = requests.get(url).json()
-    if datetime.now().hour > 12:
+    if datetime.now().hour > 4:
         wea = res['data']['list'][1]
         weather = wea['weather']
         low = wea['low']
@@ -89,7 +89,7 @@ def get_notion_text(page_id):
 
 def update():
     old_status = get_notion_status()
-    while (datetime.now().hour >= 20) | (datetime.now().hour < 2):
+    while (datetime.now().hour >= 12) & (datetime.now().hour <= 18):
         new_status = get_notion_status()
         if (new_status != old_status) & (new_status == True):
             old_status = new_status
