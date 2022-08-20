@@ -89,7 +89,7 @@ def get_notion_text(page_id):
 
 def update():
     old_status = get_notion_status()
-    while (datetime.now().hour >= 12) & (datetime.now().hour <= 18):
+    while (datetime.now().hour >= 12) & (datetime.now().hour < 18):
         new_status = get_notion_status()
         if (new_status != old_status) & (new_status == True):
             old_status = new_status
